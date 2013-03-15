@@ -28,7 +28,7 @@ If you'd like to contribute to the plugin you can find it on GitHub: [https://gi
 
 == Screenshots ==
 
-1. Stats shown in the footer
+1. The customisable gift message and checkbox
 
 == Changelog ==
 
