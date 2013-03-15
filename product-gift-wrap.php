@@ -32,8 +32,18 @@ class WC_Product_Gift_Wrap {
 	 */
 	public function __construct() {
 
+		$default_message = '<p class="gift-wrapping" style="clear:both; padding-top: .5em;"><label>{checkbox} Gift wrap this item for {price}?</label></p>';
+
 		$this->gift_wrap_enabled = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
 		$this->gift_wrap_cost    = get_option( 'product_gift_wrap_cost', 0 );
+		$this->product_gift_wrap_message = get_option( 'product_gift_wrap_message' );
+
+		if ( ! $this->product_gift_wrap_message )
+			$this->product_gift_wrap_message = $default_message;
+
+		add_option( 'product_gift_wrap_enabled', 'no' );
+		add_option( 'product_gift_wrap_cost', '0' );
+		add_option( 'product_gift_wrap_message', '' );
 
 		// Init settings
 		$this->settings = array(
@@ -48,11 +58,16 @@ class WC_Product_Gift_Wrap {
 				'desc' 		=> __( 'The cost of gift wrap unless overridden per-product.', 'product_gift_wrap' ),
 				'id' 		=> 'product_gift_wrap_cost',
 				'type' 		=> 'text',
+				'desc_tip'  => true
+			),
+			array(
+				'name' 		=> __( 'Gift Wrap Message', 'product_gift_wrap' ),
+				'desc' 		=> __( 'Default', 'product_gift_wrap' ) . ': ' . htmlspecialchars( $default_message ),
+				'id' 		=> 'product_gift_wrap_message',
+				'type' 		=> 'text',
+				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend.', 'product_gift_wrap' )
 			),
 		);
-
-		add_option( 'product_gift_wrap_enabled', 'no' );
-		add_option( 'product_gift_wrap_cost', '0' );
 
 		// Display on the front end
 		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'gift_option_html' ), 10 );
@@ -90,9 +105,10 @@ class WC_Product_Gift_Wrap {
 		if ( $is_wrappable == 'yes' ) {
 
 			$current_value = ! empty( $_REQUEST['gift_wrap'] ) ? 1 : 0;
-			$price_text    = $this->gift_wrap_cost > 0 ? sprintf( ' ' . __( 'for %s', 'product_gift_wrap' ), woocommerce_price( $this->gift_wrap_cost ) ) : '';
+			$price_text    = $this->gift_wrap_cost > 0 ? woocommerce_price( $this->gift_wrap_cost ) : __( 'free', 'product_gift_wrap' );
+			$checkbox      = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ).' />';
 
-			echo '<p class="gift-wrapping"><label><input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ).' /> '. sprintf( __( 'Gift wrap%s?', 'product_gift_wrap' ), $price_text ) . '</label></p>';
+			echo str_replace( array( '{checkbox}', '{price}' ), array( $checkbox, $price_text ), $this->product_gift_wrap_message );
 		}
 	}
 
