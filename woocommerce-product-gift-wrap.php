@@ -8,6 +8,8 @@ Author: Mike Jolley
 Author URI: http://mikejolley.com
 Requires at least: 3.5
 Tested up to: 3.5
+Text Domain: product_gift_wrap
+Domain Path: /languages/
 
 	Copyright: © 2013 Mike Jolley.
 	License: GNU General Public License v3.0
@@ -238,10 +240,10 @@ class WC_Product_Gift_Wrap {
 
 		woocommerce_wp_text_input( array(
 				'id'          => '_gift_wrap_cost',
-				'label'       => __( 'Gift Wrap Cost', 'woocommerce_limited_deals' ),
+				'label'       => __( 'Gift Wrap Cost', 'product_gift_wrap' ),
 				'placeholder' => $this->gift_wrap_cost,
 				'desc_tip'    => true,
-				'description' => __( 'Override the default cost by inputting a cost here.', 'woocommerce' ),
+				'description' => __( 'Override the default cost by inputting a cost here.', 'product_gift_wrap' ),
 			) );
 
 		$woocommerce->add_inline_js( "
