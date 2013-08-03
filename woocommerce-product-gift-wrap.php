@@ -105,7 +105,13 @@ class WC_Product_Gift_Wrap {
 		if ( $is_wrappable == 'yes' ) {
 
 			$current_value = ! empty( $_REQUEST['gift_wrap'] ) ? 1 : 0;
-			$price_text    = $this->gift_wrap_cost > 0 ? woocommerce_price( $this->gift_wrap_cost ) : __( 'free', 'product_gift_wrap' );
+
+			$cost = get_post_meta( $post->ID, '_gift_wrap_cost', true );
+
+			if ( $cost == '' )
+				$cost = $this->gift_wrap_cost;
+
+			$price_text    = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'product_gift_wrap' );
 			$checkbox      = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ).' />';
 
 			echo str_replace( array( '{checkbox}', '{price}' ), array( $checkbox, $price_text ), $this->product_gift_wrap_message );
