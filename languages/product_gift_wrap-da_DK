@@ -1,0 +1,102 @@
+# This Danish Language File: Copyright (C) 2013 by Rasmus Ishøi.
+# This file is distributed under the same license as the WooCommerce Product Gift Wrap Plugin package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Product Gift Wrap v1.0.0\n"
+"Report-Msgid-Bugs-To: rasmus.ishoi@gmail.com\n"
+"POT-Creation-Date: 2014-04-28 17:54:56+0000\n"
+"PO-Revision-Date: 2013-03-27 21:41+0100\n"
+"Last-Translator: Rasmus Ishøi <rasmus.ishoi@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: woocommerce-product-gift-wrap.php:53
+msgid "Default Gift Wrap Status"
+msgstr "Standard gave indpaknings status"
+
+#: woocommerce-product-gift-wrap.php:54
+msgid "Enable this to allow gift wrapping by default."
+msgstr "Aktiver dette for at tillade gave indpakning som standard."
+
+#: woocommerce-product-gift-wrap.php:59
+msgid "Default Gift Wrap Cost"
+msgstr "Standard gave indpaknings pris"
+
+#: woocommerce-product-gift-wrap.php:60
+msgid "The cost of gift wrap unless overridden per-product."
+msgstr "Prisen for gave indpakning med mindre det er overskrevet per-produkt."
+
+#: woocommerce-product-gift-wrap.php:66
+msgid "Gift Wrap Message"
+msgstr "Gave indpaknings besked"
+
+#: woocommerce-product-gift-wrap.php:67
+msgid "Default"
+msgstr "Standard"
+
+#: woocommerce-product-gift-wrap.php:70
+msgid "The checkbox and label shown to the user on the frontend."
+msgstr "Tjekboksen og mærket som vises til brugeren på siden."
+
+#: woocommerce-product-gift-wrap.php:110
+msgid "free"
+msgstr "gratis"
+
+#: woocommerce-product-gift-wrap.php:175 woocommerce-product-gift-wrap.php:214
+msgid "Gift Wrapped"
+msgstr "Gave indpakket"
+
+#: woocommerce-product-gift-wrap.php:176 woocommerce-product-gift-wrap.php:177
+#: woocommerce-product-gift-wrap.php:214
+msgid "Yes"
+msgstr "Ja"
+
+#: woocommerce-product-gift-wrap.php:237
+msgid "Gift Wrappable"
+msgstr "Mulighed for indpakning"
+
+#: woocommerce-product-gift-wrap.php:238
+msgid "Enable this option if the customer can choose gift wrapping."
+msgstr "Aktiver denne mulighed hvis brugeren kan vælge gave indpakning."
+
+#: woocommerce-product-gift-wrap.php:243
+msgid "Gift Wrap Cost"
+msgstr "Pris for indpakning"
+
+#: woocommerce-product-gift-wrap.php:246
+msgid "Override the default cost by inputting a cost here."
+msgstr "Overskriv standard prisen ved at skrive en pris her."
+
+#: woocommerce-product-gift-wrap.php:0
+msgid "WooCommerce Product Gift Wrap"
+msgstr "WooCommerce Gave Indpakning"
+
+#: woocommerce-product-gift-wrap.php:0
+msgid "https://github.com/mikejolley/woocommerce-product-gift-wrap"
+msgstr "https://github.com/mikejolley/woocommerce-product-gift-wrap"
+
+#: woocommerce-product-gift-wrap.php:0
+msgid "Add an option to your products to enable gift wrapping. Optionally charge a fee. For WooCommerce 2.0+ @todo Design selection."
+msgstr "Tilføj en mulighed til dine produkter som aktiverer gave indpakning. Eventuelt sæt en takst. Til WooCommerce 2.0 eller højere. (@todo Design) "
+
+#: woocommerce-product-gift-wrap.php:0
+msgid "Mike Jolley"
+msgstr "Mike Jolley"
+
+#: woocommerce-product-gift-wrap.php:0
+msgid "http://mikejolley.com"
+msgstr "http://mikejolley.com"
+
+#: woocommerce-product-gift-wrap.php:0
+msgid "1.0.0"
+msgstr "1.0.0"
