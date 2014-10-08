@@ -32,6 +32,11 @@ If you'd like to contribute to the plugin you can find it on GitHub: [https://gi
 
 == Changelog ==
 
+= 1.0.2 =
+* Japanese language.
+* Danish language.
+* Brazilian Portuguese language.
+
 = 1.0.1 =
 * Fix gift wrap price overrides
 * German language
