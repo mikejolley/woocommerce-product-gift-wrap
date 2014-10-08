@@ -11,7 +11,7 @@ Tested up to: 3.5
 Text Domain: product_gift_wrap
 Domain Path: /languages/
 
-	Copyright: © 2013 Mike Jolley.
+	Copyright: Â© 2013 Mike Jolley.
 	License: GNU General Public License v3.0
 	License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -34,7 +34,7 @@ class WC_Product_Gift_Wrap {
 	 */
 	public function __construct() {
 
-		$default_message = '<p class="gift-wrapping" style="clear:both; padding-top: .5em;"><label>{checkbox} Gift wrap this item for {price}?</label></p>';
+		$default_message = '<p class="gift-wrapping" style="clear:both; padding-top: .5em;"><label>{checkbox} '.__( "Gift wrap this item for", "product_gift_wrap" ).' {price}?</label></p>';
 
 		$this->gift_wrap_enabled = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
 		$this->gift_wrap_cost    = get_option( 'product_gift_wrap_cost', 0 );
