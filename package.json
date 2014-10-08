@@ -1,0 +1,15 @@
+{
+  "name": "woocommerce-product-gift-wrap",
+  "title": "WC Product Gift Wrap",
+  "version": "1.1.0",
+  "homepage": "http://wordpress.org/plugins/woocommerce-product-gift-wrap/",
+  "main": "Gruntfile.js",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-shell": "~0.6.4",
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.1.0"
+  }
+}
