@@ -33,6 +33,8 @@ If you'd like to contribute to the plugin you can find it on GitHub: [https://gi
 == Changelog ==
 
 = 1.1.0 =
+* WC 2.2 compatibility.
+* Changed 'Gift Wrap Message' option to include only the label. Markup can be changed via a template file.
 * Updated textdomain to woocommerce-product-gift-wrap.
 * Japanese language.
 * Danish language.

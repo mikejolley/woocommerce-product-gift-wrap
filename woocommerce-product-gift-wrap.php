@@ -33,7 +33,7 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function __construct() {
-		$default_message                 = '<p class="gift-wrapping" style="clear:both; padding-top: .5em;"><label>{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' ) . '</label></p>';
+		$default_message                 = '{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' );
 		$this->gift_wrap_enabled         = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
 		$this->gift_wrap_cost            = get_option( 'product_gift_wrap_cost', 0 );
 		$this->product_gift_wrap_message = get_option( 'product_gift_wrap_message' );
@@ -44,13 +44,13 @@ class WC_Product_Gift_Wrap {
 
 		add_option( 'product_gift_wrap_enabled', 'no' );
 		add_option( 'product_gift_wrap_cost', '0' );
-		add_option( 'product_gift_wrap_message', '' );
+		add_option( 'product_gift_wrap_message', $default_message );
 
 		// Init settings
 		$this->settings = array(
 			array(
-				'name' 		=> __( 'Default Gift Wrap Status', 'woocommerce-product-gift-wrap' ),
-				'desc' 		=> __( 'Enable this to allow gift wrapping by default.', 'woocommerce-product-gift-wrap' ),
+				'name' 		=> __( 'Gift Wrapping Enabled by Default?', 'woocommerce-product-gift-wrap' ),
+				'desc' 		=> __( 'Enable this to allow gift wrapping for products by default.', 'woocommerce-product-gift-wrap' ),
 				'id' 		=> 'product_gift_wrap_enabled',
 				'type' 		=> 'checkbox',
 			),
@@ -63,7 +63,6 @@ class WC_Product_Gift_Wrap {
 			),
 			array(
 				'name' 		=> __( 'Gift Wrap Message', 'woocommerce-product-gift-wrap' ),
-				'desc' 		=> __( 'Default', 'woocommerce-product-gift-wrap' ) . ': ' . htmlspecialchars( $default_message ),
 				'id' 		=> 'product_gift_wrap_message',
 				'type' 		=> 'text',
 				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend.', 'woocommerce-product-gift-wrap' )
@@ -100,8 +99,9 @@ class WC_Product_Gift_Wrap {
 
 		$is_wrappable = get_post_meta( $post->ID, '_is_gift_wrappable', true );
 
-		if ( $is_wrappable == '' && $this->gift_wrap_enabled )
+		if ( $is_wrappable == '' && $this->gift_wrap_enabled ) {
 			$is_wrappable = 'yes';
+		}
 
 		if ( $is_wrappable == 'yes' ) {
 
@@ -109,13 +109,18 @@ class WC_Product_Gift_Wrap {
 
 			$cost = get_post_meta( $post->ID, '_gift_wrap_cost', true );
 
-			if ( $cost == '' )
+			if ( $cost == '' ) {
 				$cost = $this->gift_wrap_cost;
+			}
 
-			$price_text    = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
-			$checkbox      = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ).' />';
+			$price_text = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
+			$checkbox   = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ) . ' />';
 
-			echo str_replace( array( '{checkbox}', '{price}' ), array( $checkbox, $price_text ), $this->product_gift_wrap_message );
+			woocommerce_get_template( 'gift-wrap.php', array(
+				'product_gift_wrap_message' => $this->product_gift_wrap_message,
+				'checkbox'                  => $checkbox,
+				'price_text'                => $price_text
+			), 'woocommerce-product-gift-wrap', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
 		}
 	}
 
@@ -128,15 +133,15 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function add_cart_item_data( $cart_item_meta, $product_id ) {
-		global $woocommerce;
-
 		$is_wrappable = get_post_meta( $product_id, '_is_gift_wrappable', true );
 
-		if ( $is_wrappable == '' && $this->gift_wrap_enabled )
+		if ( $is_wrappable == '' && $this->gift_wrap_enabled ) {
 			$is_wrappable = 'yes';
+		}
 
-		if ( ! empty( $_POST['gift_wrap'] ) && $is_wrappable == 'yes' )
+		if ( ! empty( $_POST['gift_wrap'] ) && $is_wrappable == 'yes' ) {
 			$cart_item_meta['gift_wrap'] = true;
+		}
 
 		return $cart_item_meta;
 	}
@@ -156,8 +161,9 @@ class WC_Product_Gift_Wrap {
 
 			$cost = get_post_meta( $cart_item['data']->id, '_gift_wrap_cost', true );
 
-			if ( $cost == '' )
+			if ( $cost == '' ) {
 				$cost = $this->gift_wrap_cost;
+			}
 
 			$cart_item['data']->adjust_price( $cost );
 		}
@@ -174,7 +180,6 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function get_item_data( $item_data, $cart_item ) {
-
 		if ( ! empty( $cart_item['gift_wrap'] ) )
 			$item_data[] = array(
 				'name'    => __( 'Gift Wrapped', 'woocommerce-product-gift-wrap' ),
@@ -197,8 +202,9 @@ class WC_Product_Gift_Wrap {
 
 			$cost = get_post_meta( $cart_item['data']->id, '_gift_wrap_cost', true );
 
-			if ( $cost == '' )
+			if ( $cost == '' ) {
 				$cost = $this->gift_wrap_cost;
+			}
 
 			$cart_item['data']->adjust_price( $cost );
 		}
@@ -215,8 +221,9 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function add_order_item_meta( $item_id, $cart_item ) {
-		if ( ! empty( $cart_item['gift_wrap'] ) )
+		if ( ! empty( $cart_item['gift_wrap'] ) ) {
 			woocommerce_add_order_item_meta( $item_id, __( 'Gift Wrapped', 'woocommerce-product-gift-wrap' ), __( 'Yes', 'woocommerce-product-gift-wrap' ) );
+		}
 	}
 
 	/**
@@ -226,14 +233,15 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function write_panel() {
-		global $post, $woocommerce;
+		global $post;
 
 		echo '</div><div class="options_group show_if_simple show_if_variable">';
 
 		$is_wrappable = get_post_meta( $post->ID, '_is_gift_wrappable', true );
 
-		if ( $is_wrappable == '' && $this->gift_wrap_enabled )
+		if ( $is_wrappable == '' && $this->gift_wrap_enabled ) {
 			$is_wrappable = 'yes';
+		}
 
 		woocommerce_wp_checkbox( array(
 				'id'            => '_is_gift_wrappable',
@@ -251,7 +259,7 @@ class WC_Product_Gift_Wrap {
 				'description' => __( 'Override the default cost by inputting a cost here.', 'woocommerce-product-gift-wrap' ),
 			) );
 
-		$woocommerce->add_inline_js( "
+		wc_enqueue_js( "
 			jQuery('input#_is_gift_wrappable').change(function(){
 
 				jQuery('._gift_wrap_cost_field').hide();
