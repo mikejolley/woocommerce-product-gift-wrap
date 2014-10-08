@@ -37,6 +37,7 @@ If you'd like to contribute to the plugin you can find it on GitHub: [https://gi
 * Japanese language.
 * Danish language.
 * Brazilian Portuguese language.
+* Included POT file.
 
 = 1.0.1 =
 * Fix gift wrap price overrides
