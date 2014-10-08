@@ -64,6 +64,7 @@ class WC_Product_Gift_Wrap {
 			array(
 				'name' 		=> __( 'Gift Wrap Message', 'woocommerce-product-gift-wrap' ),
 				'id' 		=> 'product_gift_wrap_message',
+				'desc' 		=> __( 'Note: <code>{checkbox}</code> will be replaced with a checkbox and <code>{price}</code> will be replaced with the gift wrap cost.', 'woocommerce-product-gift-wrap' ),
 				'type' 		=> 'text',
 				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend.', 'woocommerce-product-gift-wrap' )
 			),
