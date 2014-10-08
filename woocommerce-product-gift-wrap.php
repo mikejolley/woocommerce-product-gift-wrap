@@ -2,16 +2,16 @@
 /*
 Plugin Name: WooCommerce Product Gift Wrap
 Plugin URI: https://github.com/mikejolley/woocommerce-product-gift-wrap
-Description: Add an option to your products to enable gift wrapping. Optionally charge a fee. For WooCommerce 2.0+ @todo Design selection.
-Version: 1.0.1
+Description: Add an option to your products to enable gift wrapping. Optionally charge a fee.
+Version: 1.1.0
 Author: Mike Jolley
 Author URI: http://mikejolley.com
 Requires at least: 3.5
-Tested up to: 3.5
-Text Domain: product_gift_wrap
+Tested up to: 4.0
+Text Domain: woocommerce-product-gift-wrap
 Domain Path: /languages/
 
-	Copyright: © 2013 Mike Jolley.
+	Copyright: © 2014 Mike Jolley.
 	License: GNU General Public License v3.0
 	License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -19,7 +19,7 @@ Domain Path: /languages/
 /**
  * Localisation
  */
-load_plugin_textdomain( 'product_gift_wrap', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+load_plugin_textdomain( 'woocommerce-product-gift-wrap', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 /**
  * WC_Product_Gift_wrap class.
@@ -33,15 +33,14 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function __construct() {
-
-		$default_message = '<p class="gift-wrapping" style="clear:both; padding-top: .5em;"><label>{checkbox} '.__( "Gift wrap this item for", "product_gift_wrap" ).' {price}?</label></p>';
-
-		$this->gift_wrap_enabled = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
-		$this->gift_wrap_cost    = get_option( 'product_gift_wrap_cost', 0 );
+		$default_message                 = '<p class="gift-wrapping" style="clear:both; padding-top: .5em;"><label>{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' ) . '</label></p>';
+		$this->gift_wrap_enabled         = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
+		$this->gift_wrap_cost            = get_option( 'product_gift_wrap_cost', 0 );
 		$this->product_gift_wrap_message = get_option( 'product_gift_wrap_message' );
 
-		if ( ! $this->product_gift_wrap_message )
+		if ( ! $this->product_gift_wrap_message ) {
 			$this->product_gift_wrap_message = $default_message;
+		}
 
 		add_option( 'product_gift_wrap_enabled', 'no' );
 		add_option( 'product_gift_wrap_cost', '0' );
@@ -50,24 +49,24 @@ class WC_Product_Gift_Wrap {
 		// Init settings
 		$this->settings = array(
 			array(
-				'name' 		=> __( 'Default Gift Wrap Status', 'product_gift_wrap' ),
-				'desc' 		=> __( 'Enable this to allow gift wrapping by default.', 'product_gift_wrap' ),
+				'name' 		=> __( 'Default Gift Wrap Status', 'woocommerce-product-gift-wrap' ),
+				'desc' 		=> __( 'Enable this to allow gift wrapping by default.', 'woocommerce-product-gift-wrap' ),
 				'id' 		=> 'product_gift_wrap_enabled',
 				'type' 		=> 'checkbox',
 			),
 			array(
-				'name' 		=> __( 'Default Gift Wrap Cost', 'product_gift_wrap' ),
-				'desc' 		=> __( 'The cost of gift wrap unless overridden per-product.', 'product_gift_wrap' ),
+				'name' 		=> __( 'Default Gift Wrap Cost', 'woocommerce-product-gift-wrap' ),
+				'desc' 		=> __( 'The cost of gift wrap unless overridden per-product.', 'woocommerce-product-gift-wrap' ),
 				'id' 		=> 'product_gift_wrap_cost',
 				'type' 		=> 'text',
 				'desc_tip'  => true
 			),
 			array(
-				'name' 		=> __( 'Gift Wrap Message', 'product_gift_wrap' ),
-				'desc' 		=> __( 'Default', 'product_gift_wrap' ) . ': ' . htmlspecialchars( $default_message ),
+				'name' 		=> __( 'Gift Wrap Message', 'woocommerce-product-gift-wrap' ),
+				'desc' 		=> __( 'Default', 'woocommerce-product-gift-wrap' ) . ': ' . htmlspecialchars( $default_message ),
 				'id' 		=> 'product_gift_wrap_message',
 				'type' 		=> 'text',
-				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend.', 'product_gift_wrap' )
+				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend.', 'woocommerce-product-gift-wrap' )
 			),
 		);
 
@@ -113,7 +112,7 @@ class WC_Product_Gift_Wrap {
 			if ( $cost == '' )
 				$cost = $this->gift_wrap_cost;
 
-			$price_text    = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'product_gift_wrap' );
+			$price_text    = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$checkbox      = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ).' />';
 
 			echo str_replace( array( '{checkbox}', '{price}' ), array( $checkbox, $price_text ), $this->product_gift_wrap_message );
@@ -178,9 +177,9 @@ class WC_Product_Gift_Wrap {
 
 		if ( ! empty( $cart_item['gift_wrap'] ) )
 			$item_data[] = array(
-				'name'    => __( 'Gift Wrapped', 'product_gift_wrap' ),
-				'value'   => __( 'Yes', 'product_gift_wrap' ),
-				'display' => __( 'Yes', 'product_gift_wrap' )
+				'name'    => __( 'Gift Wrapped', 'woocommerce-product-gift-wrap' ),
+				'value'   => __( 'Yes', 'woocommerce-product-gift-wrap' ),
+				'display' => __( 'Yes', 'woocommerce-product-gift-wrap' )
 			);
 
 		return $item_data;
@@ -217,7 +216,7 @@ class WC_Product_Gift_Wrap {
 	 */
 	public function add_order_item_meta( $item_id, $cart_item ) {
 		if ( ! empty( $cart_item['gift_wrap'] ) )
-			woocommerce_add_order_item_meta( $item_id, __( 'Gift Wrapped', 'product_gift_wrap' ), __( 'Yes', 'product_gift_wrap' ) );
+			woocommerce_add_order_item_meta( $item_id, __( 'Gift Wrapped', 'woocommerce-product-gift-wrap' ), __( 'Yes', 'woocommerce-product-gift-wrap' ) );
 	}
 
 	/**
@@ -240,16 +239,16 @@ class WC_Product_Gift_Wrap {
 				'id'            => '_is_gift_wrappable',
 				'wrapper_class' => '',
 				'value'         => $is_wrappable,
-				'label'         => __( 'Gift Wrappable', 'product_gift_wrap' ),
-				'description'   => __( 'Enable this option if the customer can choose gift wrapping.', 'product_gift_wrap' ),
+				'label'         => __( 'Gift Wrappable', 'woocommerce-product-gift-wrap' ),
+				'description'   => __( 'Enable this option if the customer can choose gift wrapping.', 'woocommerce-product-gift-wrap' ),
 			) );
 
 		woocommerce_wp_text_input( array(
 				'id'          => '_gift_wrap_cost',
-				'label'       => __( 'Gift Wrap Cost', 'product_gift_wrap' ),
+				'label'       => __( 'Gift Wrap Cost', 'woocommerce-product-gift-wrap' ),
 				'placeholder' => $this->gift_wrap_cost,
 				'desc_tip'    => true,
-				'description' => __( 'Override the default cost by inputting a cost here.', 'product_gift_wrap' ),
+				'description' => __( 'Override the default cost by inputting a cost here.', 'woocommerce-product-gift-wrap' ),
 			) );
 
 		$woocommerce->add_inline_js( "
