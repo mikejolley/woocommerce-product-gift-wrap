@@ -33,18 +33,25 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function __construct() {
-		$default_message                 = '{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' );
-		$this->gift_wrap_enabled         = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
-		$this->gift_wrap_cost            = get_option( 'product_gift_wrap_cost', 0 );
-		$this->product_gift_wrap_message = get_option( 'product_gift_wrap_message' );
+		$default_message                      = '{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' );
+		$default_message_free                 = '{checkbox} '. __( 'Gift wrap this item for free?', 'woocommerce-product-gift-wrap' );
+		$this->gift_wrap_enabled              = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
+		$this->gift_wrap_cost                 = get_option( 'product_gift_wrap_cost', 0 );
+		$this->product_gift_wrap_message      = get_option( 'product_gift_wrap_message' );
+		$this->product_gift_wrap_message_free = get_option( 'product_gift_wrap_message_free' );
 
 		if ( ! $this->product_gift_wrap_message ) {
 			$this->product_gift_wrap_message = $default_message;
 		}
 
+		if ( ! $this->product_gift_wrap_message_free ) {
+			$this->product_gift_wrap_message_free = $default_message_free;
+		}
+
 		add_option( 'product_gift_wrap_enabled', 'no' );
 		add_option( 'product_gift_wrap_cost', '0' );
 		add_option( 'product_gift_wrap_message', $default_message );
+		add_option( 'product_gift_wrap_message_free', $default_message_free );
 
 		// Init settings
 		$this->settings = array(
@@ -67,6 +74,13 @@ class WC_Product_Gift_Wrap {
 				'desc' 		=> __( 'Note: <code>{checkbox}</code> will be replaced with a checkbox and <code>{price}</code> will be replaced with the gift wrap cost.', 'woocommerce-product-gift-wrap' ),
 				'type' 		=> 'text',
 				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend.', 'woocommerce-product-gift-wrap' )
+			),
+			array(
+				'name' 		=> __( 'Free Gift Wrap Message', 'woocommerce-product-gift-wrap' ),
+				'id' 		=> 'product_gift_wrap_message_free',
+				'desc' 		=> __( 'Note: <code>{checkbox}</code> will be replaced with a checkbox', 'woocommerce-product-gift-wrap' ),
+				'type' 		=> 'text',
+				'desc_tip'  => __( 'The checkbox and label shown to the user on the frontend for free gift wraps.', 'woocommerce-product-gift-wrap' )
 			),
 		);
 
@@ -114,11 +128,12 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$price_text = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
+			$price_text = woocommerce_price( $cost );
 			$checkbox   = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ) . ' />';
+			$message    = $cost > 0 ? $this->product_gift_wrap_message : $this->product_gift_wrap_message_free;
 
 			woocommerce_get_template( 'gift-wrap.php', array(
-				'product_gift_wrap_message' => $this->product_gift_wrap_message,
+				'product_gift_wrap_message' => $message,
 				'checkbox'                  => $checkbox,
 				'price_text'                => $price_text
 			), 'woocommerce-product-gift-wrap', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
