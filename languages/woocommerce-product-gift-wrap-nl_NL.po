@@ -1,0 +1,119 @@
+# Copyright (C) 2014 WooCommerce Product Gift Wrap
+# This file is distributed under the same license as the WooCommerce Product Gift Wrap package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Product Gift Wrap 1.1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/woocommerce-product-gift-"
+"wrap\n"
+"POT-Creation-Date: 2014-12-03 21:05+0100\n"
+"PO-Revision-Date: 2014-12-03 21:06+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../woocommerce-product-gift-wrap.php:36
+#, php-format
+msgid "Gift wrap this item for %s?"
+msgstr "Inpakken in cadeauverpakking voor %s?"
+
+#: ../woocommerce-product-gift-wrap.php:37
+msgid "Gift wrap this item for free?"
+msgstr "Cadeau gratis inpakken?"
+
+#: ../woocommerce-product-gift-wrap.php:59
+msgid "Gift Wrapping Enabled by Default?"
+msgstr "Cadeauverpakking standaard inschakelen?"
+
+#: ../woocommerce-product-gift-wrap.php:60
+msgid "Enable this to allow gift wrapping for products by default."
+msgstr ""
+"Schakel deze optie in om cadeauverpakkingen voor alle producten standaard "
+"toe te staan."
+
+#: ../woocommerce-product-gift-wrap.php:65
+msgid "Default Gift Wrap Cost"
+msgstr "Standaard kosten cadeauverpakking"
+
+#: ../woocommerce-product-gift-wrap.php:66
+msgid "The cost of gift wrap unless overridden per-product."
+msgstr "De kosten van de cadeauverpakking tenzij overschreven per product."
+
+#: ../woocommerce-product-gift-wrap.php:72
+msgid "Gift Wrap Message"
+msgstr "Cadeauverpakking tekst"
+
+#: ../woocommerce-product-gift-wrap.php:74
+msgid ""
+"Note: <code>{checkbox}</code> will be replaced with a checkbox and "
+"<code>{price}</code> will be replaced with the gift wrap cost."
+msgstr ""
+"Let op: <code>{checkbox}</code> wordt vervangen door een checkbox en "
+"<code>{price}</code> wordt vervangen door de cadeauverpakkingskosten."
+
+#: ../woocommerce-product-gift-wrap.php:76
+msgid "The checkbox and label shown to the user on the frontend."
+msgstr ""
+"De checkbox en het label dat aan de gebruiker getoond wordt in de frontend."
+
+#: ../woocommerce-product-gift-wrap.php:79
+msgid "Free Gift Wrap Message"
+msgstr "Gratis cadeauverpakking tekst"
+
+#: ../woocommerce-product-gift-wrap.php:81
+msgid "Note: <code>{checkbox}</code> will be replaced with a checkbox"
+msgstr "Let op: <code>{checkbox}</code> wordt vervangen door een checkbox"
+
+#: ../woocommerce-product-gift-wrap.php:83
+msgid ""
+"The checkbox and label shown to the user on the frontend for free gift wraps."
+msgstr ""
+"De checkbox en het label dat aan de gebruiker getoond wordt in de frontend "
+"voor gratis cadeauverpakkingen."
+
+#: ../woocommerce-product-gift-wrap.php:201
+#: ../woocommerce-product-gift-wrap.php:241
+msgid "Gift Wrapped"
+msgstr "Cadeauverpakking"
+
+#: ../woocommerce-product-gift-wrap.php:202
+#: ../woocommerce-product-gift-wrap.php:203
+#: ../woocommerce-product-gift-wrap.php:241
+msgid "Yes"
+msgstr "Ja"
+
+#: ../woocommerce-product-gift-wrap.php:266
+msgid "Gift Wrappable"
+msgstr "Cadeauverpakking inschakelen"
+
+#: ../woocommerce-product-gift-wrap.php:267
+msgid "Enable this option if the customer can choose gift wrapping."
+msgstr "Schakel deze optie in als de klant voor cadeauverpakking kan kiezen."
+
+#: ../woocommerce-product-gift-wrap.php:272
+msgid "Gift Wrap Cost"
+msgstr "Kosten cadeauverpakking"
+
+#: ../woocommerce-product-gift-wrap.php:275
+msgid "Override the default cost by inputting a cost here."
+msgstr "Overschrijf de standaard kosten door hier een prijs in te voeren."
+
+#~ msgid "free"
+#~ msgstr "gratis"
+
+#~ msgid "WooCommerce Product Gift Wrap"
+#~ msgstr "WooCommerce Cadeauverpakkingen"
+
+#~ msgid ""
+#~ "Add an option to your products to enable gift wrapping. Optionally charge "
+#~ "a fee."
+#~ msgstr ""
+#~ "Voeg een optie toe aan je producten om cadeauverpakkingen in te "
+#~ "schakelen. Kosten voor cadeauverpakking kunnen ook ingevoerd worden."
