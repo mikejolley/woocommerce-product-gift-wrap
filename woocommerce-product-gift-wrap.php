@@ -19,7 +19,9 @@ Domain Path: /languages/
 /**
  * Localisation
  */
-load_plugin_textdomain( 'woocommerce-product-gift-wrap', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+function language_load() {
+    load_plugin_textdomain( 'woocommerce-product-gift-wrap', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
 
 /**
  * WC_Product_Gift_wrap class.
@@ -33,6 +35,9 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function __construct() {
+        
+        add_action( 'init', 'language_load' );
+        
 		$default_message                 = '{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' );
 		$this->gift_wrap_enabled         = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
 		$this->gift_wrap_cost            = get_option( 'product_gift_wrap_cost', 0 );
