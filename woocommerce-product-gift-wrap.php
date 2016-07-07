@@ -97,6 +97,7 @@ class WC_Product_Gift_Wrap {
 	 */
 	public function gift_option_html() {
 		global $post;
+		global $product;
 
 		$is_wrappable = get_post_meta( $post->ID, '_is_gift_wrappable', true );
 
@@ -113,7 +114,11 @@ class WC_Product_Gift_Wrap {
 			if ( $cost == '' ) {
 				$cost = $this->gift_wrap_cost;
 			}
-
+                        
+                        if (get_option('woocommerce_calc_taxes') == 'yes' && get_option('woocommerce_prices_include_tax') == 'no' && get_option('woocommerce_tax_display_shop') == 'incl') {
+                                $cost = floatval($cost) + array_sum(WC_Tax::calc_tax(floatval($cost), WC_Tax::get_rates($product->get_tax_class())));
+                        }
+			
 			$price_text = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$checkbox   = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ) . ' />';
 
