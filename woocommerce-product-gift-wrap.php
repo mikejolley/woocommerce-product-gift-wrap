@@ -115,7 +115,7 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
                         
-                        if (get_option('woocommerce_calc_taxes') == 'yes' && get_option('woocommerce_prices_include_tax') == 'no') {
+                        if (get_option('woocommerce_calc_taxes') == 'yes' && get_option('woocommerce_prices_include_tax') == 'no' && get_option('woocommerce_tax_display_shop') == 'incl') {
                                 $cost = floatval($cost) + array_sum(WC_Tax::calc_tax(floatval($cost), WC_Tax::get_rates($product->get_tax_class())));
                         }
 			
