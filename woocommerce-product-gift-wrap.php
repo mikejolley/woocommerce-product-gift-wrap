@@ -33,15 +33,6 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function __construct() {
-		$default_message                 = '{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' );
-		$this->gift_wrap_enabled         = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
-		$this->gift_wrap_cost            = get_option( 'product_gift_wrap_cost', 0 );
-		$this->product_gift_wrap_message = get_option( 'product_gift_wrap_message' );
-
-		if ( ! $this->product_gift_wrap_message ) {
-			$this->product_gift_wrap_message = $default_message;
-		}
-
 		add_option( 'product_gift_wrap_enabled', 'no' );
 		add_option( 'product_gift_wrap_cost', '0' );
 		add_option( 'product_gift_wrap_message', $default_message );
@@ -70,6 +61,9 @@ class WC_Product_Gift_Wrap {
 			),
 		);
 
+		// Initialize
+		add_action( 'init', array( $this, 'init' ) );
+
 		// Display on the front end
 		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'gift_option_html' ), 10 );
 
@@ -87,6 +81,17 @@ class WC_Product_Gift_Wrap {
 		// Admin
 		add_action( 'woocommerce_settings_general_options_end', array( $this, 'admin_settings' ) );
 		add_action( 'woocommerce_update_options_general', array( $this, 'save_admin_settings' ) );
+	}
+
+	public function init() {
+		$default_message                 = '{checkbox} '. sprintf( __( 'Gift wrap this item for %s?', 'woocommerce-product-gift-wrap' ), '{price}' );
+		$this->gift_wrap_enabled         = get_option( 'product_gift_wrap_enabled' ) == 'yes' ? true : false;
+		$this->gift_wrap_cost            = get_option( 'product_gift_wrap_cost', 0 );
+		$this->product_gift_wrap_message = get_option( 'product_gift_wrap_message' );
+
+		if ( ! $this->product_gift_wrap_message ) {
+			$this->product_gift_wrap_message = $default_message;
+		}
 	}
 
 	/**
