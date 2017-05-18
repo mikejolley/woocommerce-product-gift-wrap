@@ -323,12 +323,12 @@ function slug_get_product_meta_cb($object, $field_name, $request) {
 }
 
 add_action('rest_api_init', function() {
-	register_api_field('product', '_is_gift_wrappable', array(
+	register_rest_field('product', '_is_gift_wrappable', array(
 		'get_callback' => 'slug_get_product_meta_cb',
 		'update_callback' => 'slug_update_product_meta_cb',
 		'schema' => null
 	));
-	register_api_field('product', '_gift_wrap_cost', array(
+	register_rest_field('product', '_gift_wrap_cost', array(
 		'get_callback' => 'slug_get_product_meta_cb',
 		'update_callback' => 'slug_update_product_meta_cb',
 		'schema' => null
