@@ -114,10 +114,10 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$price_text = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
+			$price_text = $cost > 0 ? wc_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$checkbox   = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ) . ' />';
 
-			woocommerce_get_template( 'gift-wrap.php', array(
+			wc_get_template( 'gift-wrap.php', array(
 				'product_gift_wrap_message' => $this->product_gift_wrap_message,
 				'checkbox'                  => $checkbox,
 				'price_text'                => $price_text
@@ -160,13 +160,14 @@ class WC_Product_Gift_Wrap {
 		if ( ! empty( $values['gift_wrap'] ) ) {
 			$cart_item['gift_wrap'] = true;
 
-			$cost = get_post_meta( $cart_item['data']->id, '_gift_wrap_cost', true );
+			$cost = get_post_meta( $cart_item['data']->get_id(), '_gift_wrap_cost', true );
 
 			if ( $cost == '' ) {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$cart_item['data']->adjust_price( $cost );
+			$cost = $cart_item['data']->get_price() + $cost;
+			$cart_item['data']->set_price( $cost );
 		}
 
 		return $cart_item;
@@ -201,13 +202,14 @@ class WC_Product_Gift_Wrap {
 	public function add_cart_item( $cart_item ) {
 		if ( ! empty( $cart_item['gift_wrap'] ) ) {
 
-			$cost = get_post_meta( $cart_item['data']->id, '_gift_wrap_cost', true );
+			$cost = get_post_meta( $cart_item['data']->get_id(), '_gift_wrap_cost', true );
 
 			if ( $cost == '' ) {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$cart_item['data']->adjust_price( $cost );
+			$cost = $cart_item['data']->get_price() + $cost;
+			$cart_item['data']->set_price( $cost );
 		}
 
 		return $cart_item;
