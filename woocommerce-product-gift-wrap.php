@@ -319,7 +319,7 @@ function slug_get_product_meta_cb($object, $field_name, $request) {
 }
 
  function slug_update_product_meta_cb( $value, $object, $field_name ) {
-	return update_post_meta( $object->id, $field_name, $value );
+	return update_post_meta( $object->ID, $field_name, $value );
 }
 
 add_action('rest_api_init', function() {
