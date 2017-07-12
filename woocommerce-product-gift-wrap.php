@@ -310,3 +310,27 @@ class WC_Product_Gift_Wrap {
 }
 
 new WC_Product_Gift_Wrap();
+
+/**
+ * callbacks for WP rest api
+ */
+function slug_get_product_meta_cb($object, $field_name, $request) {
+	return get_post_meta( $object['id'], $field_name );
+}
+
+ function slug_update_product_meta_cb( $value, $object, $field_name ) {
+	return update_post_meta( $object->ID, $field_name, $value );
+}
+
+add_action('rest_api_init', function() {
+	register_rest_field('product', '_is_gift_wrappable', array(
+		'get_callback' => 'slug_get_product_meta_cb',
+		'update_callback' => 'slug_update_product_meta_cb',
+		'schema' => null
+	));
+	register_rest_field('product', '_gift_wrap_cost', array(
+		'get_callback' => 'slug_get_product_meta_cb',
+		'update_callback' => 'slug_update_product_meta_cb',
+		'schema' => null
+	));
+});
