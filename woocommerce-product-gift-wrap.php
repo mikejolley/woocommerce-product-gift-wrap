@@ -114,10 +114,10 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$price_text = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
+			$price_text = $cost > 0 ? wc_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$checkbox   = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ) . ' />';
 
-			woocommerce_get_template( 'gift-wrap.php', array(
+            wc_get_template( 'gift-wrap.php', array(
 				'product_gift_wrap_message' => $this->product_gift_wrap_message,
 				'checkbox'                  => $checkbox,
 				'price_text'                => $price_text
@@ -166,7 +166,7 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$cart_item['data']->adjust_price( $cost );
+			$cart_item['data']->get_price( $cost );
 		}
 
 		return $cart_item;
@@ -207,7 +207,7 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$cart_item['data']->adjust_price( $cost );
+			$cart_item['data']->get_price( $cost );
 		}
 
 		return $cart_item;
@@ -223,7 +223,7 @@ class WC_Product_Gift_Wrap {
 	 */
 	public function add_order_item_meta( $item_id, $cart_item ) {
 		if ( ! empty( $cart_item['gift_wrap'] ) ) {
-			woocommerce_add_order_item_meta( $item_id, __( 'Gift Wrapped', 'woocommerce-product-gift-wrap' ), __( 'Yes', 'woocommerce-product-gift-wrap' ) );
+            wc_add_order_item_meta( $item_id, __( 'Gift Wrapped', 'woocommerce-product-gift-wrap' ), __( 'Yes', 'woocommerce-product-gift-wrap' ) );
 		}
 	}
 
@@ -282,7 +282,7 @@ class WC_Product_Gift_Wrap {
 	 */
 	public function write_panel_save( $post_id ) {
 		$_is_gift_wrappable = ! empty( $_POST['_is_gift_wrappable'] ) ? 'yes' : 'no';
-		$_gift_wrap_cost   = ! empty( $_POST['_gift_wrap_cost'] ) ? woocommerce_clean( $_POST['_gift_wrap_cost'] ) : '';
+		$_gift_wrap_cost   = ! empty( $_POST['_gift_wrap_cost'] ) ? wc_clean( $_POST['_gift_wrap_cost'] ) : '';
 
 		update_post_meta( $post_id, '_is_gift_wrappable', $_is_gift_wrappable );
 		update_post_meta( $post_id, '_gift_wrap_cost', $_gift_wrap_cost );
