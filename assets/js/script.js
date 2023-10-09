@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
             type: 'POST',
             url: formAction,
             data: data,
-            success: function(response) {
+            success: function() {
                 // reload to make sure cart is updated with all themes
                 location.reload();
             },
