@@ -18,6 +18,8 @@ WooCommerce > Settings lets you set up the default gift-wrappable status per-pro
 
 If the customer adds gift wrap, it is shown in cart + orders, and adds your defined cost to the item cost too.
 
+If you want to use the option to allow the customer only to have all product wrapped as gift, you first need to setup a product, that acts as gift wrap. This product will then define the price for wrapping all ordered cart items as gift.
+
 If you'd like to contribute to the plugin you can find it on GitHub: [https://github.com/mikejolley/woocommerce-product-gift-wrap](https://github.com/mikejolley/woocommerce-product-gift-wrap)
 
 == Installation ==
@@ -31,6 +33,9 @@ If you'd like to contribute to the plugin you can find it on GitHub: [https://gi
 1. The customisable gift message and checkbox
 
 == Changelog ==
+
+= 1.2.0 =
+* Add option to wrap all items in cart as gift (not individually per product)
 
 = 1.1.0 =
 * WC 2.2 compatibility.
