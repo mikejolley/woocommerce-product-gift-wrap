@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-09 15:21+0200\n"
+"POT-Creation-Date: 2023-10-19 07:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,86 +38,85 @@ msgstr ""
 msgid ""
 "Enable this to allow customer to order all cart items wrapped (this will "
 "automatically enable gift wrapping by default. Please consider to adjust the "
-"gift wrap message accordingly. It will also add a \"Wrap all cart items as "
-"gift\" button to the cart)."
+"gift wrap message accordingly)."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:73
+#: woocommerce-product-gift-wrap.php:72
 msgid "Show Wrap all Items in Cart Button?"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:74
+#: woocommerce-product-gift-wrap.php:73
 msgid ""
 "Enable this to show a button in the cart, that allows the customer to put "
 "all items in the cart in a gift wrap."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:79
+#: woocommerce-product-gift-wrap.php:78
 msgid "Product Gift Wrapping"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:80
+#: woocommerce-product-gift-wrap.php:79
 msgid ""
 "Please choose your gift product (this must be a standard WooCommerce "
 "product. Please be aware, that with this option the gift wrap cost will be "
 "taken from this product once globally for the whole cart)."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:87
+#: woocommerce-product-gift-wrap.php:86
 msgid "Default Gift Wrap Cost"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:88
+#: woocommerce-product-gift-wrap.php:87
 msgid "The cost of gift wrap unless overridden per-product."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:94
+#: woocommerce-product-gift-wrap.php:93
 msgid "Gift Wrap Message"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:96
+#: woocommerce-product-gift-wrap.php:95
 msgid ""
 "Note: <code>{checkbox}</code> will be replaced with a checkbox and "
 "<code>{price}</code> will be replaced with the gift wrap cost."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:98
+#: woocommerce-product-gift-wrap.php:97
 msgid "The checkbox and label shown to the user on the frontend."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:175 woocommerce-product-gift-wrap.php:198
+#: woocommerce-product-gift-wrap.php:174 woocommerce-product-gift-wrap.php:197
 msgid "free"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:199
+#: woocommerce-product-gift-wrap.php:198
 msgid "All cart items wrapped as Gift"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:339 woocommerce-product-gift-wrap.php:435
+#: woocommerce-product-gift-wrap.php:338 woocommerce-product-gift-wrap.php:434
 msgid "Gift Wrapped"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:340 woocommerce-product-gift-wrap.php:341
-#: woocommerce-product-gift-wrap.php:435
+#: woocommerce-product-gift-wrap.php:339 woocommerce-product-gift-wrap.php:340
+#: woocommerce-product-gift-wrap.php:434
 msgid "Yes"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:420
+#: woocommerce-product-gift-wrap.php:419
 msgid "Your products won't be wrapped as gift anymore."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:462
+#: woocommerce-product-gift-wrap.php:461
 msgid "Gift Wrappable"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:463
+#: woocommerce-product-gift-wrap.php:462
 msgid "Enable this option if the customer can choose gift wrapping."
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:468
+#: woocommerce-product-gift-wrap.php:467
 msgid "Gift Wrap Cost"
 msgstr ""
 
-#: woocommerce-product-gift-wrap.php:471
+#: woocommerce-product-gift-wrap.php:470
 msgid "Override the default cost by inputting a cost here."
 msgstr ""
