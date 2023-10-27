@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
     }
 
     // submit wrap all cart items as gift
-    jQuery('button#gift_wrap_cart').click(function(event) {
+    jQuery('button#gift_wrap_cart').on('click', function(event) {
         event.preventDefault();
 
         const $form = jQuery(this).closest('form');
