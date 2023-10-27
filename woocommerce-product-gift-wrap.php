@@ -64,10 +64,9 @@ class WC_Product_Gift_Wrap {
 			),
 			array(
 				'name' 		=> __( 'Gift Wrapping whole Cart?', 'woocommerce-product-gift-wrap' ),
-				'desc' 		=> __( 'Enable this to allow customer to order all cart items wrapped (this will automatically enable gift wrapping by default. Please consider to adjust the gift wrap message accordingly. It will also add a "Wrap all cart items as gift" button to the cart).', 'woocommerce-product-gift-wrap' ),
+				'desc' 		=> __( 'Enable this to allow customer to order all cart items wrapped (this will automatically enable gift wrapping by default. Please consider to adjust the gift wrap message accordingly).', 'woocommerce-product-gift-wrap' ),
 				'id' 		=> 'product_gift_wrap_cart_enabled',
 				'type' 		=> 'checkbox',
-				'desc_tip'  => true
 			),
             array(
 				'name' 		=> __( 'Show Wrap all Items in Cart Button?', 'woocommerce-product-gift-wrap' ),
@@ -148,6 +147,23 @@ class WC_Product_Gift_Wrap {
 	}
 
 	/**
+	 * Get product price by id
+	 *
+	 * @access public
+	 * @param int $product_id
+	 * @return mixed
+	 */
+	function get_product_price_by_id($product_id) {
+		$product = wc_get_product($product_id);
+
+		if ($product) {
+			return $product->get_price();
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Show the Gift Checkbox on the frontend
 	 *
 	 * @access public
@@ -172,6 +188,11 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
+			$gift_wrap_cart_product_price = $this->get_product_price_by_id($this->gift_wrap_cart_product_id);
+			if ( $this->gift_wrap_cart_enabled == 'yes' && $gift_wrap_cart_product_price) {
+				$cost = $gift_wrap_cart_product_price;
+			}
+
 			$price_text = $cost > 0 ? woocommerce_price( $cost ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$checkbox   = '<input type="checkbox" name="gift_wrap" value="yes" ' . checked( $current_value, 1, false ) . ' />';
 
@@ -194,7 +215,7 @@ class WC_Product_Gift_Wrap {
             return;
         }
 		if ($this->gift_wrap_cart_enabled == 'yes' && $this->gift_wrap_cart_button == 'yes' && !$this->is_product_in_cart($this->gift_wrap_cart_product_id)) {
-			$price = $this->gift_wrap_cost;
+			$price = $this->get_product_price_by_id($this->gift_wrap_cart_product_id);
 			$price_text = $price > 0 ? woocommerce_price( $price ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$button   = '<button class="button" id="gift_wrap_cart" name="gift_wrap_cart">' . __( 'All cart items wrapped as Gift', 'woocommerce-product-gift-wrap' ) . '</button>';
 
@@ -249,7 +270,7 @@ class WC_Product_Gift_Wrap {
 	 *
 	 * @access public
 	 * @param mixed $cart_item_meta
-	 * @param mixed $product_id
+	 * @param int $product_id
 	 * @return void
 	 */
 	public function add_cart_item_data( $cart_item_meta, $product_id ) {
