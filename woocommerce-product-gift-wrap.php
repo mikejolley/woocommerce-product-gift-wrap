@@ -135,11 +135,11 @@ class WC_Product_Gift_Wrap {
 			'posts_per_page' => -1,
 		);
 
-		$products = get_posts($args);
+		$products = get_posts( $args );
 
 		$product_list = array();
 
-		foreach ($products as $product) {
+		foreach ( $products as $product ) {
 			$product_list[$product->ID] = $product->post_title;
 		}
 
@@ -154,7 +154,7 @@ class WC_Product_Gift_Wrap {
 	 * @return mixed
 	 */
 	function get_product_price_by_id($product_id) {
-		$product = wc_get_product($product_id);
+		$product = wc_get_product( $product_id );
 
 		if ($product) {
 			return $product->get_price();
@@ -188,8 +188,8 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			$gift_wrap_cart_product_price = $this->get_product_price_by_id($this->gift_wrap_cart_product_id);
-			if ( $this->gift_wrap_cart_enabled == 'yes' && $gift_wrap_cart_product_price) {
+			if ( $this->gift_wrap_cart_enabled == 'yes' ) {
+				$gift_wrap_cart_product_price = $this->get_product_price_by_id( $this->gift_wrap_cart_product_id );
 				$cost = $gift_wrap_cart_product_price;
 			}
 
@@ -211,11 +211,11 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function gift_cart_button_html() {
-		if (! is_cart() ) {
+		if ( ! is_cart() ) {
             return;
         }
-		if ($this->gift_wrap_cart_enabled == 'yes' && $this->gift_wrap_cart_button == 'yes' && !$this->is_product_in_cart($this->gift_wrap_cart_product_id)) {
-			$price = $this->get_product_price_by_id($this->gift_wrap_cart_product_id);
+		if ( $this->gift_wrap_cart_enabled == 'yes' && $this->gift_wrap_cart_button == 'yes' && !$this->is_product_in_cart( $this->gift_wrap_cart_product_id ) ) {
+			$price = $this->get_product_price_by_id( $this->gift_wrap_cart_product_id );
 			$price_text = $price > 0 ? woocommerce_price( $price ) : __( 'free', 'woocommerce-product-gift-wrap' );
 			$button   = '<button class="button" id="gift_wrap_cart" name="gift_wrap_cart">' . __( 'All cart items wrapped as Gift', 'woocommerce-product-gift-wrap' ) . '</button>';
 
@@ -236,7 +236,7 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
     public function add_gift_cart_script() {
-	    if (! is_cart() ) {
+	    if ( ! is_cart() ) {
 		    return;
 	    }
 	    wp_enqueue_script( 'ajax-script', plugins_url('/assets/js/script.js', __FILE__), array('jquery'), '1.0', true );
@@ -250,16 +250,16 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function wrap_all_cart_items_as_gift() {
-		if (isset($_POST['wrap_all_as_gift']) && $_POST['wrap_all_as_gift'] === '1') {
+		if ( isset($_POST['wrap_all_as_gift']) && $_POST['wrap_all_as_gift'] === '1' ) {
 			$cart = WC()->cart->get_cart();
-			foreach ($cart as $cart_item_key => $cart_item) {
-				if ($this->gift_wrap_cart_product_id != $cart_item['product_id'] && (!isset($cart_item['gift_wrap']) || $cart_item['gift_wrap'] == false)) {
+			foreach ( $cart as $cart_item_key => $cart_item ) {
+				if ( $this->gift_wrap_cart_product_id != $cart_item['product_id'] && ( ! isset($cart_item['gift_wrap'] ) || $cart_item['gift_wrap'] == false ) ) {
 					$cart_item['gift_wrap'] = true;
 					WC()->cart->cart_contents[$cart_item_key] = $cart_item;
 				}
 			}
 
-			if (!$this->is_product_in_cart($this->gift_wrap_cart_product_id)) {
+			if ( ! $this->is_product_in_cart( $this->gift_wrap_cart_product_id ) ) {
 				$this->add_gift_product_to_cart();
 			}
         }
@@ -280,7 +280,7 @@ class WC_Product_Gift_Wrap {
 			$is_wrappable = 'yes';
 		}
 
-		if ( (!empty( $_POST['gift_wrap'] ) && $is_wrappable == 'yes') || ($this->gift_wrap_cart_enabled && $this->is_product_in_cart($this->gift_wrap_cart_product_id))) {
+		if ( ( ! empty( $_POST['gift_wrap'] ) && $is_wrappable == 'yes') || ( $this->gift_wrap_cart_enabled && $this->is_product_in_cart( $this->gift_wrap_cart_product_id ) ) ) {
 			$cart_item_meta['gift_wrap'] = true;
 		}
 
@@ -306,11 +306,11 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			if ($this->gift_wrap_cart_enabled == 'yes' && !$this->is_product_in_cart($this->gift_wrap_cart_product_id)) {
+			if ( $this->gift_wrap_cart_enabled == 'yes' && !$this->is_product_in_cart( $this->gift_wrap_cart_product_id ) ) {
 				$this->add_gift_product_to_cart();
 			}
 
-			if ($this->gift_wrap_cart_enabled != 'yes') {
+			if ( $this->gift_wrap_cart_enabled != 'yes' ) {
 				$cart_item['data']->adjust_price( $cost );
 			}
 		}
@@ -334,11 +334,11 @@ class WC_Product_Gift_Wrap {
 				$cost = $this->gift_wrap_cost;
 			}
 
-			if ($this->gift_wrap_cart_enabled == 'yes' && !$this->is_product_in_cart($this->gift_wrap_cart_product_id)) {
+			if ( $this->gift_wrap_cart_enabled == 'yes' && !$this->is_product_in_cart( $this->gift_wrap_cart_product_id ) ) {
 				$this->add_gift_product_to_cart();
 			}
 
-			if ($this->gift_wrap_cart_enabled != 'yes') {
+			if ( $this->gift_wrap_cart_enabled != 'yes' ) {
 				$cart_item['data']->adjust_price( $cost );
 			}
 		}
@@ -376,7 +376,7 @@ class WC_Product_Gift_Wrap {
 		$cart = WC()->cart->get_cart();
 
 		foreach ($cart as $cart_item_key => $cart_item) {
-			if (! empty( $cart_item['gift_wrap'] )) {
+			if ( ! empty( $cart_item['gift_wrap'] ) ) {
 				$cart_item['gift_wrap'] = false;
 				WC()->cart->cart_contents[$cart_item_key] = $cart_item;
 			}
@@ -390,12 +390,12 @@ class WC_Product_Gift_Wrap {
 	 * @param int $product_id
 	 * @return boolean
 	 */
-	public function is_product_in_cart($product_id) {
+	public function is_product_in_cart( $product_id ) {
 		$cart = WC()->cart->get_cart();
 		$product_in_cart = false;
 
-		foreach ($cart as $cart_item) {
-			if ($cart_item['product_id'] == $product_id) {
+		foreach ( $cart as $cart_item ) {
+			if ( $cart_item['product_id'] == $product_id ) {
 				$product_in_cart = true;
 				break;
 			}
@@ -411,7 +411,7 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function add_gift_product_to_cart() {
-		WC()->cart->add_to_cart($this->gift_wrap_cart_product_id, 1);
+		WC()->cart->add_to_cart( $this->gift_wrap_cart_product_id, 1 );
 	}
 
 	/**
@@ -422,23 +422,23 @@ class WC_Product_Gift_Wrap {
 	 * @param mixed $cart
 	 * @return void
 	 */
-	public function remove_item_from_cart($cart_item_key, $cart) {
-		if ($this->gift_wrap_cart_enabled == 'yes') {
+	public function remove_item_from_cart( $cart_item_key, $cart ) {
+		if ( $this->gift_wrap_cart_enabled == 'yes' ) {
 			$cart_items = $cart->get_cart();
 			$gift_wrap_removed = false;
 
-			foreach ($cart_items as $cart_item) {
-				if ($cart_item && isset($cart_item['product_id'])) {
-					if ($cart_item['product_id'] == $this->gift_wrap_cart_product_id) {
+			foreach ( $cart_items as $cart_item ) {
+				if ( $cart_item && isset( $cart_item['product_id'] ) ) {
+					if ( $cart_item['product_id'] == $this->gift_wrap_cart_product_id ) {
 						$gift_wrap_removed = true;
 					}
 				}
 			}
 
-			if ($gift_wrap_removed) {
+			if ( $gift_wrap_removed ) {
 				WC()->cart->calculate_totals();
 				$this->remove_gift_meta_from_cart_items();
-				wc_add_notice(__( 'Your products won\'t be wrapped as gift anymore.', 'woocommerce-product-gift-wrap' ), 'info');
+				wc_add_notice( __( 'Your products won\'t be wrapped as gift anymore.', 'woocommerce-product-gift-wrap' ), 'info' );
 			}
 		}
 	}
@@ -466,7 +466,7 @@ class WC_Product_Gift_Wrap {
 	public function write_panel() {
 		global $post;
 
-		if ($this->gift_wrap_cart_enabled != 'yes') {
+		if ( $this->gift_wrap_cart_enabled != 'yes' ) {
 
 			echo '</div><div class="options_group show_if_simple show_if_variable">';
 
@@ -559,7 +559,6 @@ class WC_Product_Gift_Wrap {
 	public function save_admin_settings() {
 		global $post;
 
-        // TODO: check if this is needed
 		$this->gift_wrap_cart_product_id = get_post_meta( $post->ID, 'product_gift_wrap_cart_product', true );
 
 		woocommerce_update_options( $this->settings );
