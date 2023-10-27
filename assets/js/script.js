@@ -1,5 +1,7 @@
 jQuery(document).ready(function () {
 
+    const productId = cart_ajax?.productId;
+
     // disable quantity for gift product
     const $giftProduct = jQuery('a[data-product_id="' + productId + '"]');
     if ($giftProduct.length) {
