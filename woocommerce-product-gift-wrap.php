@@ -121,7 +121,6 @@ class WC_Product_Gift_Wrap {
 		// Admin
 		add_action( 'woocommerce_settings_general_options_end', array( $this, 'admin_settings' ) );
 		add_action( 'woocommerce_update_options_general', array( $this, 'save_admin_settings' ) );
-		add_action( 'admin_notices', array( $this, 'display_admin_notices' ) );
 	}
 
 	/**
@@ -560,17 +559,6 @@ class WC_Product_Gift_Wrap {
 	}
 
 	/**
-	 * display_admin_notices function.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function display_admin_notices() {
-		// This function is intentionally left empty
-		// We're using it to prevent the default WooCommerce admin notice from displaying
-	}
-
-	/**
 	 * display_error_notice function.
 	 *
 	 * @access public
@@ -593,13 +581,19 @@ class WC_Product_Gift_Wrap {
 	 * @return void
 	 */
 	public function save_admin_settings() {
-		global $post;
-
 		$this->gift_wrap_cart_product_id = get_option('product_gift_wrap_cart_product');
 		if ( $this->gift_wrap_cart_enabled == 'yes' && $this->gift_wrap_cart_product_id === 'empty' ) {
-			$this->error_message = __( 'Please choose a product as gift', 'woocommerce-product-gift-wrap' );
+			$this->gift_wrap_cart_enabled = 'no';
+            $this->gift_wrap_cart_button = 'no';
+			wc_enqueue_js( "
+			    jQuery('#product_gift_wrap_cart_enabled').removeAttr('checked');
+			    jQuery('#product_gift_wrap_cart_button').removeAttr('checked');
+                jQuery('#product_gift_wrap_cart_product').closest('tr').slideUp();
+                jQuery('#product_gift_wrap_cart_button').closest('tr').slideUp();
+                jQuery('#product_gift_wrap_cost').closest('tr').slideDown();
+            " );
+			$this->error_message = __( 'Please choose a product as gift (all cart items wrapped has been disabled automatically)', 'woocommerce-product-gift-wrap' );
 			add_action( 'admin_notices', array( $this, 'display_error_notice' ) );
-			remove_action('admin_notices', 'wc_add_admin_notice');
 			return;
 		}
 
