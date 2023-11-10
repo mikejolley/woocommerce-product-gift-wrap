@@ -9,12 +9,16 @@ jQuery(document).ready(function () {
     }
 
     // submit wrap all cart items as gift
-    jQuery('button#gift_wrap_cart').on('click', function(event) {
+    jQuery(document).on('click', 'button#gift_wrap_cart', function(event) {
         event.preventDefault();
 
-        const $form = jQuery(this).closest('form');
-        const formAction = $form.attr('action');
-        const data = $form.serialize();
+        jQuery('button#gift_wrap_cart').attr('disabled', true);
+
+        const $container = jQuery(this).closest('#gift-wrapping-cart-container');
+        const formAction = $container.attr('data-action');
+        const data = {
+            wrap_all_as_gift: 1
+        };
 
         jQuery.ajax({
             type: 'POST',
@@ -22,7 +26,8 @@ jQuery(document).ready(function () {
             data: data,
             success: function() {
                 // reload to make sure cart is updated with all themes
-                location.reload();
+                window.location.reload();
+                jQuery('button#gift_wrap_cart').removeAttr('disabled');
             },
             error: function(xhr, status, error) {
                 console.warn('Add gift wrap to whole cart failed with: ', error);
