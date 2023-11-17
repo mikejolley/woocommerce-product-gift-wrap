@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mike.jol
 Tags: woocommerce, product, gift wrap
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
